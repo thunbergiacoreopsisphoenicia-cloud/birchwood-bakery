@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Birchwood Bakery | Order for pickup</title>
+  <meta name="description" content="Today's bake at Birchwood Bakery. Build a slip, pick a time, collect at the counter.">
+  <meta name="theme-color" content="#1e35cf">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800&family=Hanken+Grotesk:wght@400;500;600&family=Overpass+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip" href="#board">Skip to the menu</a>
+
+  <header class="bar">
+    <div class="bar-in">
+      <a class="brand" href="./" aria-label="Birchwood Bakery, home">
+        <svg class="mark" viewBox="0 0 32 32" width="30" height="30" aria-hidden="true">
+          <rect width="32" height="32" rx="6" fill="#fff"/>
+          <path d="M8 9h9M13 14h11M8 19h7M16 24h8" stroke="#1e35cf" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+        <span class="brand-name">Birchwood Bakery</span>
+      </a>
+      <p class="hours"><span>Tue to Sun 7:00 to 15:00</span><span>Closed Mondays</span></p>
+    </div>
+  </header>
+
+  <main class="shell">
+    <div class="menu">
+      <h1>Today&rsquo;s bake</h1>
+      <p class="lede">Pickup only, at the counter on Alder Lane. We hold a slip under your name for thirty minutes after the time you choose.</p>
+
+      <div id="board" class="board" tabindex="-1"></div>
+    </div>
+
+    <aside class="slipcol" aria-label="Your order slip">
+      <section class="slip-wrap" id="slip" aria-labelledby="slip-title">
+        <div class="slot" aria-hidden="true"></div>
+        <div class="slip">
+          <header class="slip-head">
+            <p class="slip-shop">Birchwood Bakery</p>
+            <div class="slip-id">
+              <h2 id="slip-title"><span class="sr">Your slip, number </span><span id="slip-no">No. 047</span></h2>
+              <p id="slip-date" class="slip-date"></p>
+            </div>
+          </header>
+
+          <p class="slip-empty" id="slip-empty">Nothing printed yet. Add a bake from the board and it prints here.</p>
+          <ol class="lines" id="lines"></ol>
+
+          <dl class="total" id="total-row" hidden>
+            <dt>Total</dt>
+            <dd id="total" aria-live="polite">$0.00</dd>
+          </dl>
+
+          <form class="slip-form" id="slip-form" novalidate>
+            <fieldset class="slots">
+              <legend>Pickup time</legend>
+              <div class="slot-grid" id="slot-grid"></div>
+              <p class="err" id="slot-err" role="alert" hidden>Pick a time so we know when to have it ready.</p>
+            </fieldset>
+            <label class="field">
+              <span>Name on the slip</span>
+              <input id="name" name="name" type="text" autocomplete="given-name" maxlength="24" placeholder="Guest">
+            </label>
+            <button class="print" id="print" type="submit">Print my slip</button>
+          </form>
+
+          <div class="done" id="done" hidden>
+            <p class="stamp">Printed</p>
+            <p id="done-text"></p>
+            <button class="again" id="again" type="button">Start a new slip</button>
+          </div>
+          <p class="slip-rel">Site release <span id="slip-release"></span></p>
+        </div>
+      </section>
+    </aside>
+  </main>
+
+  <a class="slipbar" id="slipbar" href="#slip">
+    <span id="slipbar-count">Your slip is empty</span>
+    <span class="slipbar-go" id="slipbar-total">View slip</span>
+  </a>
+
+  <footer class="foot">
+    <p>Birchwood Bakery, 14 Alder Lane. A fictional shop, built as a demo site.</p>
+    <p class="rel">Site release <span id="release">1.0.0</span></p>
+  </footer>
+
+  <script src="menu.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
