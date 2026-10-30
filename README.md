@@ -16,4 +16,5 @@ Open `index.html` in a browser, or run `python3 -m http.server` in this folder a
 
 ## Releases
 
+- 1.1.0: three or more of the same bake takes 10% off. Slip lines carry a 3+ offer tag.
 - 1.0.0: first public release. Menu board, order slip, pickup times.

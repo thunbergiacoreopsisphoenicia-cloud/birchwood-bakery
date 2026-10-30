@@ -1,10 +1,12 @@
 (() => {
   'use strict';
 
-  const RELEASE = '1.0.0';
+  const RELEASE = '1.1.0';
   const MENU = window.BIRCHWOOD_MENU;
   const SLOTS = window.BIRCHWOOD_SLOTS;
   const MAX_EACH = 12;
+  const BUNDLE_MIN = 3;
+  const BUNDLE_OFF = 0.1;
 
   const $ = (sel, root = document) => root.querySelector(sel);
   const money = (cents) => '$' + (cents / 100).toFixed(2);
@@ -49,11 +51,15 @@
   function lines() {
     return MENU.filter((m) => qtyOf(m.id) > 0).map((item) => {
       const qty = qtyOf(item.id);
-      return { id: item.id, name: item.name, qty, total: item.price * qty };
+      const gross = item.price * qty;
+      const bundle = qty >= BUNDLE_MIN;
+      return { id: item.id, name: item.name, qty, bundle, total: bundle ? Math.round(gross * (1 - BUNDLE_OFF)) : gross };
     });
   }
 
-  const orderTotal = (ls) => ls.reduce((sum, l) => sum + l.total, 0);
+  // Price from the menu, so a stale cart can never change what we charge.
+  const priceOf = (id) => MENU.find((m) => m.id === id).price;
+  const orderTotal = (ls) => ls.reduce((sum, l) => sum + priceOf(l.id) * l.qty, 0);
 
   /* Board */
   const board = $('#board');
@@ -145,7 +151,14 @@
         lineEls.set(l.id, li);
       }
       li.querySelector('.q').textContent = l.qty + '×';
-      li.querySelector('.n').textContent = l.name;
+      const n = li.querySelector('.n');
+      n.textContent = l.name;
+      if (l.bundle) {
+        const tag = document.createElement('span');
+        tag.className = 'tag';
+        tag.textContent = '3+ offer';
+        n.appendChild(tag);
+      }
       li.querySelector('.p').textContent = money(l.total);
       linesEl.appendChild(li);
     });
