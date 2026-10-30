@@ -1,7 +1,7 @@
 (() => {
   'use strict';
 
-  const RELEASE = '1.1.0';
+  const RELEASE = '1.1.1';
   const MENU = window.BIRCHWOOD_MENU;
   const SLOTS = window.BIRCHWOOD_SLOTS;
   const MAX_EACH = 12;
@@ -59,7 +59,7 @@
 
   // Price from the menu, so a stale cart can never change what we charge.
   const priceOf = (id) => MENU.find((m) => m.id === id).price;
-  const orderTotal = (ls) => ls.reduce((sum, l) => sum + priceOf(l.id) * l.qty, 0);
+  const orderTotal = (ls) => ls.reduce((sum, l) => sum + l.total, 0);
 
   /* Board */
   const board = $('#board');
